@@ -1,0 +1,33 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.cluster import KMeans
+
+# 加载 wine.csv 数据集
+wine_data = pd.read_csv('wine.csv')
+
+# 假设 wine.csv 中第一列为标签，后续列为特征
+labels = wine_data.iloc[:, 0]  # 假设第一列是标签
+X = wine_data.iloc[:, 1:]  # 假设特征从第二列开始到最后一列
+
+# 使用 KMeans 进行聚类，并设置 n_init 参数以消除警告
+kmeans = KMeans(n_clusters=5, random_state=42, n_init=10)  # 假设选择 5 个簇，并设置 n_init 为 10
+label_pred = kmeans.fit_predict(X)
+
+# 设置颜色和标记
+color = ["red", "blue", "green", "orange", "purple"]  # 可选的颜色
+marker = ['o', '*', '+', 'x', 's']  # 可选的标记
+
+# 绘制聚类结果
+plt.figure(figsize=(8, 6))
+
+# 绘制每个类别的样本
+for i in range(max(label_pred) + 1):
+    x = X[label_pred == i]
+    plt.scatter(x.iloc[:, 2], x.iloc[:, 3], c=color[i % len(color)], marker=marker[i % len(marker)], label='Cluster ' + str(i + 1) + ' (' + str(len(x)) + ' points)')
+
+plt.xlabel('Feature 3')
+plt.ylabel('Feature 4')
+plt.title('KMeans Clustering of Wine Dataset')
+plt.legend(loc='best')
+plt.grid(True)
+plt.show()
