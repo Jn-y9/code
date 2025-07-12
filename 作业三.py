@@ -108,6 +108,7 @@ print(f"R²分数: {r2_score(y_test_low, y_pred_lr)}")
 print("\n随机森林回归模型评估：")
 print(f"均方误差: {mean_squared_error(y_test_low, y_pred_rf)}")
 print(f"R²分数: {r2_score(y_test_low, y_pred_rf)}")
+<<<<<<< HEAD
 
 # 特征重要性分析
 feature_importance = pd.DataFrame({
@@ -153,3 +154,5 @@ plt.legend(['最低价格', '最高价格'], fontsize=12)
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
 plt.show()
+=======
+>>>>>>> parent of c36bd2b (3.模型分析阶段)
